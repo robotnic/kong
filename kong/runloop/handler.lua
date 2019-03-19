@@ -78,16 +78,36 @@ do
     return false
   end
 
+
+  local function load_service_from_db(service_pk)
+    local service, err = kong.db.services:select(service_pk)
+    -- kong.db.services:select returns a third value, which we discard here:
+    return service, err
+  end
+
+
   local function get_service_for_route(db, route)
     local service_pk = route.service
     if not service_pk then
       return nil
     end
 
-    local service, err = db.services:select(service_pk)
-    if not service then
-      return nil, "could not find service for route (" .. route.id .. "): " ..
+    local service, err
+    if kong.cache then -- the kong.cache module is sometimes missing during tests
+      local cache_key = db.services:cache_key(service_pk.id)
+      service, err = kong.cache:get(cache_key, CACHE_ROUTER_OPTS,
+                                    load_service_from_db, service_pk)
+
+    else
+      service, err = load_service_from_db(service_pk)
+    end
+
+    if err then
+      return nil, "error raised while finding service for route (" .. route.id .. "): " ..
                   err
+
+    elseif not service then
+      return nil, "could not find service for route (" .. route.id .. ")"
     end
 
     -- TODO: this should not be needed as the schema should check it already
