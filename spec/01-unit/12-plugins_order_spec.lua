@@ -74,6 +74,7 @@ describe("Plugins", function()
       "udp-log",
       "tcp-log",
       "loggly",
+      "runscope",
       "syslog",
       "request-termination",
       "correlation-id",

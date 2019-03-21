@@ -109,6 +109,8 @@ build = {
     ["kong.tools.ciphers"] = "kong/tools/ciphers.lua",
     ["kong.tools.dns"] = "kong/tools/dns.lua",
     ["kong.tools.utils"] = "kong/tools/utils.lua",
+    ["kong.tools.public"] = "kong/tools/public.lua",
+
     ["kong.tools.printable"] = "kong/tools/printable.lua",
     ["kong.tools.timestamp"] = "kong/tools/timestamp.lua",
 
@@ -208,6 +210,8 @@ build = {
     ["kong.plugins.log-buffering.buffer"] = "kong/plugins/log-buffering/buffer.lua",
 
     ["kong.plugins.log-serializers.basic"] = "kong/plugins/log-serializers/basic.lua",
+    ["kong.plugins.log-serializers.runscope"] = "kong/plugins/log-serializers/runscope.lua",
+
 
     ["kong.plugins.tcp-log.handler"] = "kong/plugins/tcp-log/handler.lua",
     ["kong.plugins.tcp-log.schema"] = "kong/plugins/tcp-log/schema.lua",
@@ -221,6 +225,10 @@ build = {
 
     ["kong.plugins.file-log.handler"] = "kong/plugins/file-log/handler.lua",
     ["kong.plugins.file-log.schema"] = "kong/plugins/file-log/schema.lua",
+
+    ["kong.plugins.runscope.handler"] = "kong/plugins/runscope/handler.lua",
+    ["kong.plugins.runscope.schema"] = "kong/plugins/runscope/schema.lua",
+    ["kong.plugins.runscope.log"] = "kong/plugins/runscope/log.lua",
 
     ["kong.plugins.rate-limiting.migrations"] = "kong/plugins/rate-limiting/migrations/init.lua",
     ["kong.plugins.rate-limiting.migrations.000_base_rate_limiting"] = "kong/plugins/rate-limiting/migrations/000_base_rate_limiting.lua",

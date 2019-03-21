@@ -20,6 +20,7 @@ local plugins = {
   "syslog",
   "loggly",
   "datadog",
+  "runscope",
   "ldap-auth",
   "statsd",
   "bot-detection",
