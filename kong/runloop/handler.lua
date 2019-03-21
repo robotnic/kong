@@ -92,15 +92,9 @@ do
       return nil
     end
 
-    local service, err
-    if kong.cache then -- the kong.cache module is sometimes missing during tests
-      local cache_key = db.services:cache_key(service_pk.id)
-      service, err = kong.cache:get(cache_key, CACHE_ROUTER_OPTS,
-                                    load_service_from_db, service_pk)
-
-    else
-      service, err = load_service_from_db(service_pk)
-    end
+    local cache_key = db.services:cache_key(service_pk.id)
+    local service, err = kong.cache:get(cache_key, CACHE_ROUTER_OPTS,
+                                        load_service_from_db, service_pk)
 
     if err then
       return nil, "error raised while finding service for route (" .. route.id .. "): " ..
